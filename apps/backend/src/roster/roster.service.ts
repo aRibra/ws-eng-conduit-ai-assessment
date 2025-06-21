@@ -19,7 +19,7 @@ export class RosterService {
       const qb = this.userRepository.createQueryBuilder('user');
       const result = await qb
         .leftJoin('user.articles', 'articles')
-        .leftJoin('user.favorites', 'user_favorites')
+        .leftJoin('articles.favorites', 'article_favorites')
         .select([
           'user.username AS username',
           'user.id AS profileId',
