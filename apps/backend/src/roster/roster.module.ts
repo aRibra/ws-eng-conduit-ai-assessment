@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RosterController } from './roster.controller';
 import { RosterService } from './roster.service';
 import { User } from '../user/user.entity';
+import { AuthMiddleware } from '../shared/middleware/auth.middleware';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
