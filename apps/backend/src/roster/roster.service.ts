@@ -25,7 +25,15 @@ export class RosterService {
 
     const result = await query.getRawMany();
 
-    return result.map(row => ({
+    interface RosterRow {
+      username: string;
+      profileId: number;
+      totalArticles: string;
+      totalFavorites: string;
+      firstArticleDate: string | null;
+    }
+
+    return result.map((row: RosterRow) => ({
       username: row.username,
       profileId: row.profileId,
       totalArticles: Number(row.totalArticles) || 0,
