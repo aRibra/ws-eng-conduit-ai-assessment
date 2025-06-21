@@ -6,6 +6,6 @@ export const ROSTER_ROUTES: Route[] = [
   {
     path: '',
     component: RosterComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
 ];
