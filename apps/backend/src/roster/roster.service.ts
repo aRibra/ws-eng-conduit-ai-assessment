@@ -19,12 +19,12 @@ export class RosterService {
       const qb = this.userRepository.createQueryBuilder('user');
       const result = await qb
         .leftJoin('user.articles', 'articles')
-        .leftJoin('articles.favorites', 'article_favorites')
+        .leftJoin('user.favorites', 'user_favorites')
         .select([
           'user.username AS username',
           'user.id AS profileId',
-          'COALESCE(COUNT(articles.id), 0) AS totalArticles',
-          'COALESCE(COUNT(article_favorites.id), 0) AS totalFavorites',
+          'COALESCE(COUNT(DISTINCT articles.id), 0) AS totalArticles',
+          'COALESCE(COUNT(DISTINCT user_favorites.id), 0) AS totalFavorites',
           'MIN(articles.created_at) AS firstArticleDate',
         ])
         .groupBy('user.id')
