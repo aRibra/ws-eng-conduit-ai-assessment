@@ -38,7 +38,8 @@ export class RosterService {
         firstArticleDate: row.firstArticleDate || null,
       }));
     } catch (error) {
-      console.error('RosterService error:', error.stack);
+      const err = error as Error;
+      console.error('RosterService error:', err.stack);
       throw new HttpException('Failed to fetch roster stats', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
