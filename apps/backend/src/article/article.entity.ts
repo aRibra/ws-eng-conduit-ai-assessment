@@ -46,6 +46,9 @@ export class Article {
   @OneToMany(() => Comment, (comment) => comment.article, { eager: true, orphanRemoval: true })
   comments = new Collection<Comment>(this);
 
+  @ManyToMany(() => User, user => user.favorites, { owner: true })
+  favorites = new Collection<User>(this);
+
   @Property({ type: 'number' })
   favoritesCount = 0;
 
