@@ -4,7 +4,7 @@ import { RosterService } from './roster.service';
 import { RosterDto } from './dto/roster.dto';
 
 @ApiTags('roster')
-@Controller('api/roster')
+@Controller('roster')
 export class RosterController {
   constructor(private readonly rosterService: RosterService) {}
 

@@ -1,12 +1,14 @@
+// apps/backend/src/roster/roster.module.ts
 import { Module, MiddlewareConsumer, NestModule, RequestMethod } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { RosterController } from './roster.controller';
 import { RosterService } from './roster.service';
 import { User } from '../user/user.entity';
-import { AuthMiddleware } from '../shared/middleware/auth.middleware';
+import { AuthMiddleware } from '../user/auth.middleware';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [MikroOrmModule.forFeature([User]), UserModule],
   controllers: [RosterController],
   providers: [RosterService],
   exports: [RosterService],

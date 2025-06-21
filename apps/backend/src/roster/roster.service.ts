@@ -1,4 +1,3 @@
-// apps/backend/src/roster/roster.service.ts
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { EntityManager } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
@@ -19,12 +18,11 @@ export class RosterService {
       const qb = this.userRepository.createQueryBuilder('user');
       const result = await qb
         .leftJoin('user.articles', 'articles')
-        .leftJoin('articles.favorites', 'article_favorites')
         .select([
           'user.username AS username',
           'user.id AS profileId',
           'COALESCE(COUNT(DISTINCT articles.id), 0) AS totalArticles',
-          'COALESCE(COUNT(DISTINCT user_favorites.id), 0) AS totalFavorites',
+          'COALESCE(SUM(articles.favorites_count), 0) AS totalFavorites',
           'MIN(articles.created_at) AS firstArticleDate',
         ])
         .groupBy('user.id')
